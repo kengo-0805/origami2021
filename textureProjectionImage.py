@@ -29,7 +29,7 @@ CHESS_BLOCKSIZE = 80  # [px]
 
 BOARD_WIDTH = 0.02  # chessboard の横幅 [m]
 BOARD_HEIGHT = 0.01  # chessboard の縦幅 [m]
-BOARD_X = 0.  # chessboard の3次元位置X座標 [m]（右手系）
+BOARD_X = 0.  # chessboard の3次元位置X座標 [m]（右手系）<-手前のものほど値が大きい
 BOARD_Y = 0.  # chessboard の3次元位置Y座標 [m]（右手系）
 BOARD_Z = 0.41  # chessboard の3次元位置Z座標 [m]（右手系）
 
@@ -141,17 +141,17 @@ def board():
     # テクスチャの頂点の指定
     gl.glBegin(gl.GL_QUADS)
 
-    # # 座標たち
-    # gl.glTexCoord2i(0, 0)  # テクスチャ座標（左上）id = 0
-    # gl.glVertex3f(-0.145, -0.16, BOARD_Z)
-    # gl.glTexCoord2i(0, 1)  # テクスチャ座標（左下）id = 3
-    # gl.glVertex3f(-0.145, BOARD_Y, BOARD_Z)
-    # gl.glTexCoord2i(1, 1)  # テクスチャ座標（右下）id = 2
-    # gl.glVertex3f(0.145, BOARD_Y, BOARD_Z)
-    # gl.glTexCoord2i(1, 0)  # テクスチャ座標（右上）id = 1
-    # gl.glVertex3f(0.145, -0.16, BOARD_Z)
-    # gl.glEnd()
-    # gl.glPopMatrix()
+    # 座標たち
+    gl.glTexCoord2i(0, 0)  # テクスチャ座標（左上）id = 0
+    gl.glVertex3f(-0.145, -0.16, BOARD_Z)
+    gl.glTexCoord2i(0, 1)  # テクスチャ座標（左下）id = 3
+    gl.glVertex3f(-0.145, BOARD_Y, BOARD_Z)
+    gl.glTexCoord2i(1, 1)  # テクスチャ座標（右下）id = 2
+    gl.glVertex3f(0.145, BOARD_Y, BOARD_Z)
+    gl.glTexCoord2i(1, 0)  # テクスチャ座標（右上）id = 1
+    gl.glVertex3f(0.145, -0.16, BOARD_Z)
+    gl.glEnd()
+    gl.glPopMatrix()
 
 
 # # 座標たち
@@ -183,17 +183,17 @@ def board():
 #     print((tex_X[2]*0.29/160) - 0.145, -(tex_Y[2]*0.16/90))
 #     print("右上")
 #     print((tex_X[0]*0.29/160) - 0.145, -(tex_Y[0]*0.16/90))
-# 折り線の座標たち
-    gl.glTexCoord2i(0, 0) # テクスチャ座標（左上）id = 0
-    gl.glVertex3f((tex_X[1]*0.29/160) - 0.145 - alfa, -(tex_Y[1]*0.16/90) + alfa, BOARD_Z)
-    gl.glTexCoord2i(0, 1) # テクスチャ座標（左下）id = 3
-    gl.glVertex3f((tex_X[3]*0.29/160) - 0.145 - alfa, -(tex_Y[3]*0.16/90) + alfa, BOARD_Z)
-    gl.glTexCoord2i(1, 1) # テクスチャ座標（右下）id = 2
-    gl.glVertex3f((tex_X[2]*0.29/160) - 0.145 - alfa, -(tex_Y[2]*0.16/90) + alfa, BOARD_Z)
-    gl.glTexCoord2i(1, 0) # テクスチャ座標（右上）id = 1
-    gl.glVertex3f((tex_X[0]*0.29/160) - 0.145 - alfa, -(tex_Y[0]*0.16/90) + alfa, BOARD_Z)
-    gl.glEnd()
-    gl.glPopMatrix()
+# # 折り線の座標たち
+#     gl.glTexCoord2i(0, 0) # テクスチャ座標（左上）id = 0
+#     gl.glVertex3f((tex_X[1]*0.29/160) - 0.145 - alfa, -(tex_Y[1]*0.16/90) + alfa, BOARD_Z)
+#     gl.glTexCoord2i(0, 1) # テクスチャ座標（左下）id = 3
+#     gl.glVertex3f((tex_X[3]*0.29/160) - 0.145 - alfa, -(tex_Y[3]*0.16/90) + alfa, BOARD_Z)
+#     gl.glTexCoord2i(1, 1) # テクスチャ座標（右下）id = 2
+#     gl.glVertex3f((tex_X[2]*0.29/160) - 0.145 - alfa, -(tex_Y[2]*0.16/90) + alfa, BOARD_Z)
+#     gl.glTexCoord2i(1, 0) # テクスチャ座標（右上）id = 1
+#     gl.glVertex3f((tex_X[0]*0.29/160) - 0.145 - alfa, -(tex_Y[0]*0.16/90) + alfa, BOARD_Z)
+#     gl.glEnd()
+#     gl.glPopMatrix()
 
 def run_animation(dt):
     global num, tex_X, tex_Y
@@ -319,8 +319,8 @@ window = pyglet.window.Window(
 
 @window.event
 def on_draw():
-    pyglet.clock.schedule_interval(run_animation, dt_anim / 1000.0)
-    # on_draw_impl()
+    # pyglet.clock.schedule_interval(run_animation, dt_anim / 1000.0)
+    on_draw_impl()
 
 video_path = 1
 cap = cv2.VideoCapture(video_path)
